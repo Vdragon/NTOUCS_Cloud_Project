@@ -1,0 +1,220 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>give me a house!</title>
+	<link href="ntou.ico" rel="shortcut icon" type="image/x-icon">
+	<style type="text/css">
+	body {
+	background-image:url('hd_wall_11299.jpg');
+ 	background-color:#CCFF66;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:center; 
+	}
+	table
+	{
+	text-align:center;
+	}
+	</style>
+	</head>
+<?php
+function getObjectImg($instance)
+{
+	// 執行指令
+	$array_string = exec($instance,$result,$rc); //instance?
+	//echo $res[0]."<br />\n";
+	if($result[0] === "HTTP/1.1 307 TEMPORARY_REDIRECT"){
+		// 拆解回傳資訊的位置（Location:....）
+		// 找出欲修改位置
+		//echo $res[2] . "<br />";
+		$before = substr($result[2], 10, 7);
+		$target = substr($result[2], 17, 5);
+		$affter = substr($result[2], 22);
+		// 轉址
+		switch (substr($target, -1)) {
+				case "1":					// node1	140.121.198.160
+			$target = "140.121.198.160";	break;
+				case "2":					// node2	140.121.198.146
+			$target = "140.121.198.146";	break;
+				case "3":					// node3	140.121.198.148
+			$target = "140.121.198.148";	break;
+				case "4":					// node4	140.121.198.141
+			$target = "140.121.198.141";	break;
+				case "5":					// node5	140.121.198.142
+			$target = "140.121.198.142";	break;
+				case "6":					// node6	140.121.198.143
+			$target = "140.121.198.143";	break;
+				case "7":					// node7	140.121.198.144
+			$target = "140.121.198.144";	break;
+				case "8":					// node8	140.121.198.150
+			$target = "140.121.198.150";	break;
+				case "9":					// node9	140.121.198.153
+			$target = "140.121.198.153";	break;
+			}
+		// 重組目標連結
+		$src = $before . $target . $affter;
+		return $src;
+		}//end if
+	$$instance ='';
+	$result ='';	
+}
+?>
+<body>
+<?php
+// mySQL連線部份
+$db = "cloud";
+$link = mysqli_init();
+if(!$link->real_connect("localhost", "root", "ntoucs")){
+	die("Database server GG.");
+	}
+if(!$link->set_charset("utf8")) {
+	die("Charset still in latin1.");
+	}
+//else	printf("Current character set: %s<br />\n", $link->character_set_name());
+if(!$link->select_db($db)){
+	die('Connect Error (' . $link->connect_errno . ') ' . $link->connect_error)."<br />\n";
+	}
+else
+	;
+	//printf("I'm in %s.<br />\n",$db);
+
+//正體簡體部份
+//處理'台'和'臺'的部分
+$country = $_GET['h'];
+$city = $_GET['l'];
+$pos = strpos($country, '台');
+if($pos === false)
+{;}
+else{
+	$tempstring = substr($country,-6);
+	$country = "%".$tempstring;
+	}
+
+// 建立query
+$query  = "SELECT * FROM `House` WHERE `Address` LIKE \"".$country.$city."%\" LIMIT " . $_GET['limit'] . ",5";
+//echo "query is : ".$query."<br />\n";
+$rowCount = 0;
+$sql = "SELECT COUNT( * ) FROM `House` WHERE `Address` LIKE \"".$country.$city."%\"";
+//echo "sql is : ".$sql."<br />\n";
+
+if($link->multi_query($sql)){
+	do{
+		if($result = $link->store_result()){
+			if(($result->num_rows) == 0)
+				break;
+			$row = $result->fetch_row();
+			$rowCount = $row[0];
+			$result->free();
+			}
+		}while($link->next_result());
+	}
+//echo " rowCount = $rowCount <br>" ;
+echo "<font size=5>您正在尋找 <b  style='color:#FADD2E;'>".$_GET['h'].$city."</b> 的情報：</font><br />
+<font size=4>一共有 <b  style='color:#FADD2E;'>" . $rowCount . "</b> 物件</font>
+<hr align='left' width='1000px'/>";
+echo '
+<!表單部份>
+<table width="1000" border="0" cellpadding="1" cellspacing="1">
+<thead bgcolor="#999999">
+	<td>物件圖片</td>
+	<td>標題</td>
+	<td>地址</td>
+	<td>金額</td>
+</thead>
+<tbody style="background-color:rgba(255,255,255,0.5);">
+';
+$objectnumber = 0;	// 物件編號
+$objectTitle = "";	// 標題
+$objectAddress = "";	// 物件地址
+$objectMoney = 0;	// 物件金額
+$objectImg = "";
+
+// 執行 mySQL 指令
+if($link->multi_query($query)){
+	do{
+		if($result = $link->store_result()){
+			// 偵測有沒有物件
+			// 沒物件，跳
+			if(($result->num_rows) == 0){
+				echo '抱歉，目前此區尚無房屋出售的情報。<br />';
+				break;
+				}
+
+			// 有物件，開始抓
+			while($row = $result->fetch_row()){
+				$objectnumber = $row[0];	// 物件編號
+				$objectTitle = $row[1];		// 標題
+				$objectAddress = $row[2];	// 物件地址
+				$objectMoney = $row[4];		// 物件金額
+				$objectMoneyTenThousand = $objectMoney/10000;
+				$objectMoneyTenThousand %= 10000; 			// 萬元
+				$objectMoneyTenBillent = (int)($objectMoney/100000000);	// 億元
+				$inst = "curl -i -L \"http://node1:50070/webhdfs/v1/House/".$objectnumber."/image/1.jpg?op=OPEN\"";
+				$objectImg = getObjectImg($inst);
+				$inst = '';
+
+				echo "	<tr>".PHP_EOL;
+				echo "		<td width=242><a href='object.php?Oid=".$objectnumber."&near=".$country.$city."'><img width=240 height=130 src='$objectImg' /></a></td>".PHP_EOL;
+				echo "		<td><a href='object.php?Oid=".$objectnumber."&near=".$country.$city."'>$objectTitle</a></td>".PHP_EOL;
+				echo "		<td>$objectAddress</td>".PHP_EOL;
+				echo "		<td> ";
+				if($objectMoneyTenBillent >= 1)
+					echo "$objectMoneyTenBillent 億";
+				if($objectMoneyTenThousand > 0)
+					echo "$objectMoneyTenThousand 萬";
+				echo "元</td>".PHP_EOL;
+				echo "	</tr>".PHP_EOL;
+				}
+			// 釋放 mySQL 的結果
+			$result->free();
+			}//stroe_result結束
+		if($link->more_results()){
+			printf("------\n");
+			}
+		}while($link->next_result());
+	}
+mysqli_close($link);
+
+echo "
+	</tbody>
+</table>
+<!選單部份>
+<table width='1000' border='0' cellpadding='1' cellspacing='1' bgcolor='#999999'>
+	<tr>
+		<td><a href=objectlist?h=".$_GET['h']."&l=".$_GET['l']."&limit=0>第一頁</a><td>
+";
+
+echo"		<td>";
+if($_GET['limit']-5 < 0)	// 0-4
+	echo "上一頁";
+else				// above
+	echo "<a href=objectlist?h=".$_GET['h']."&l=".$_GET['l']."&limit=".($_GET['limit']-5).">上一頁</a>";
+echo "	</td>".PHP_EOL;
+
+echo "		<td>第 ".((int)($_GET['limit']/5)+1)." 頁 / 共 ";	//0-4->1 5-9->2
+if($rowCount%5 != 0)	// (5n+a)/5=n
+	echo ((int)($rowCount/5)+1)." 頁";
+else			// 5n/5=n
+	echo ($rowCount/5)." 頁";
+echo "</td>".PHP_EOL;
+
+echo "		<td>";
+if($_GET['limit']+5 >= $rowCount)
+	echo "下一頁";
+else
+	echo "<a href=objectlist?h=".$_GET['h']."&l=".$_GET['l']."&limit=".($_GET['limit']+5).">下一頁</a>";
+echo "</td>".PHP_EOL;
+
+if($rowCount%5 == 0)
+	echo "		<td><a href=objectlist?h=".$_GET['h']."&l=".$_GET['l']."&limit=".($rowCount-5).">最後頁</a></td>";
+else
+	echo "		<td><a href=objectlist?h=".$_GET['h']."&l=".$_GET['l']."&limit=".((int)($rowCount/5)*5).">最後頁</a></td>";
+echo "
+	</tr>
+</table>
+<br/>";
+
+?>
+	</body>
+</html>
+
