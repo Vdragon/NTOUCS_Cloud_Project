@@ -40,7 +40,7 @@ public class Command
 	}
 	public void crawl_Nutch(int depth,int width) 
 	{
-		cmd.exex("/opt/nutch/bin/nutch crawl urls -solr http://140.121.198.160:8080/solr/ -depth "+depth+" -topN "+width);
+		cmd.exex("/opt/nutch/bin/nutch crawl urls -solr http://node1:8080/solr/ -depth "+depth+" -topN "+width);
 	}
 	public void Upload_HDFS(String filePath,String targetPath)
 	{
