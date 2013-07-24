@@ -1,4 +1,5 @@
 package GUI;
+import java.io.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import admin.AdminSystem;
 
 import timer.TimerLabel;
 public class MasterFrame extends JFrame{
+	
 
 	
 private JPanel contentPane;
@@ -20,6 +22,11 @@ private FlowLayout layout;
 private final String[] labelStr={"Nutch狀態","Solr狀態","距離下次更新剩",};
 private final String[] labelSwtichStr={"開啟","關閉"};
 private JTabbedPane tabbedPane;
+
+//save
+File saveFile=new File("config.txt");
+private int save_width = 0;
+	
 
 
 //nutch
@@ -32,8 +39,8 @@ private JButton nutchParameterSwitch;
 private JComboBox depth,width;
 private final String [] depthParameter={"2","3","4","5"};
 private final String [] widthParameter={"100","1000","10000"};
-private int nutch_width=100;
-private int nutch_depth=3;
+private int nutch_width;
+private int nutch_depth;
 
 //end nutch
 
@@ -77,6 +84,26 @@ private AdminSystem system;
 
 public 	MasterFrame() 
 {
+
+		try {
+		     BufferedReader br = new BufferedReader(new FileReader("config.txt"));
+		     String line;
+		     if((line = br.readLine()) != null) {
+		    	 nutch_depth=Integer.parseInt(line);
+		     }
+		     if((line = br.readLine()) != null) {
+		    	 nutch_width=Integer.parseInt(line);		    	 
+		    	 for(int i=1;i<(nutch_width/100);i=i*10){
+		    		 save_width++;		    		 
+		    	 }		    	 
+		     }
+		    
+		     br.close();
+		    }
+		catch (IOException e) {
+		     e.printStackTrace();
+		    }	
+			
 		setTitle("Cloud 管理介面");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -98,8 +125,8 @@ public 	MasterFrame()
 		nutchParameterSwitch=new JButton("編輯");
 		depth=new JComboBox(depthParameter);
 		width=new JComboBox(widthParameter);
-		depth.setSelectedIndex(1);
-		width.setSelectedIndex(0);
+		depth.setSelectedIndex(nutch_depth-2);
+		width.setSelectedIndex(save_width);
 		
 		JPanel panel_Nutch_Switch = new JPanel(new GridLayout(1,3));
 		panel_Nutch_Switch.add(new JLabel("",SwingConstants.CENTER));
@@ -163,7 +190,6 @@ public 	MasterFrame()
 						depth.setVisible(true);
 						width.setVisible(true);
 						
-						
 					}else{
 						system.set_Parameter_Nutch(nutch_depth, nutch_width);
 						nutch_depth_stat.setText(String.valueOf(nutch_depth));
@@ -171,6 +197,21 @@ public 	MasterFrame()
 						nutchParameterSwitch.setText("編輯");
 						depth.setVisible(false);
 						width.setVisible(false);
+						
+						String a = Integer.toString(nutch_depth) + "\n";
+						String b = Integer.toString(nutch_width) + "\n";
+						
+						try
+					    {
+					      FileWriter fwriter=new FileWriter(saveFile);
+					      fwriter.write(a);
+					      fwriter.write(b);
+					      fwriter.close();
+					    }
+					    catch(Exception e)
+					    {
+					      e.printStackTrace();
+					    }
 						
 					}
 				}
@@ -260,8 +301,8 @@ public 	MasterFrame()
 		timer_Changer_panel.setBorder(titled);
 		
 		nutch_parameter_stat_panel= new JPanel(new GridLayout(1,4));
-		this.nutch_depth_stat=new JLabel("3");
-		this.nutch_width_stat=new JLabel("100");
+		this.nutch_depth_stat=new JLabel(Integer.toString(nutch_depth));
+		this.nutch_width_stat=new JLabel(Integer.toString(nutch_width));
 		
 		nutch_parameter_stat_panel.add(new JLabel("深度"));
 		nutch_parameter_stat_panel.add(nutch_depth_stat);
