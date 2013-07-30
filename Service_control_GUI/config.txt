@@ -1,2 +1,2 @@
-5
-10000
+nutch_depth:2
+nutch_width:10000

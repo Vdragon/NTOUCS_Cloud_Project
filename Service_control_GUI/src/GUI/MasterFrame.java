@@ -13,7 +13,6 @@ import admin.AdminSystem;
 
 import timer.TimerLabel;
 public class MasterFrame extends JFrame{
-	
 
 	
 private JPanel contentPane;
@@ -85,18 +84,40 @@ private AdminSystem system;
 public 	MasterFrame() 
 {
 
-		try {
-		     BufferedReader br = new BufferedReader(new FileReader("config.txt"));
-		     String line;
-		     if((line = br.readLine()) != null) {
-		    	 nutch_depth=Integer.parseInt(line);
+	try {
+		String store;
+		int i=0;
+		String num="";
+	     BufferedReader br = new BufferedReader(new FileReader("config.txt"));
+	     String line;
+	     line = br.readLine();
+	     store = line.substring(0,11);
+	    	 if(store.compareTo("nutch_depth")==0) {
+	    		 num = line.substring(12);
+		    	 nutch_depth=Integer.parseInt(num);
 		     }
-		     if((line = br.readLine()) != null) {
-		    	 nutch_width=Integer.parseInt(line);		    	 
-		    	 for(int i=1;i<(nutch_width/100);i=i*10){
+	    	 else if(store.compareTo("nutch_width")==0) {
+	    		 num = line.substring(12);
+		    	 nutch_width=Integer.parseInt(num);		    	 
+		    	 for(i=1;i<(nutch_width/100);i=i*10){
 		    		 save_width++;		    		 
-		    	 }		    	 
+		    	 }
+	    	 }
+	    	 line = br.readLine();
+	    	 store = line.substring(0,11);
+		     if(store.compareTo("nutch_depth")==0) {
+	    		 num = line.substring(12);
+		    	 nutch_depth=Integer.parseInt(num);
 		     }
+	    	 else if(store.compareTo("nutch_width")==0) {
+	    		 num = line.substring(12);
+		    	 nutch_width=Integer.parseInt(num);		    	 
+		    	 for(i=1;i<(nutch_width/100);i=i*10){
+		    		 save_width++;		    		 
+		    	 }
+	    	 }
+	    	 
+	    	 
 		    
 		     br.close();
 		    }
@@ -198,8 +219,8 @@ public 	MasterFrame()
 						depth.setVisible(false);
 						width.setVisible(false);
 						
-						String a = Integer.toString(nutch_depth) + "\n";
-						String b = Integer.toString(nutch_width) + "\n";
+						String a = "nutch_depth:"+Integer.toString(nutch_depth) + "\n";
+						String b = "nutch_width:"+Integer.toString(nutch_width) + "\n";
 						
 						try
 					    {
