@@ -15,6 +15,9 @@ import timer.TimerLabel;
 public class MasterFrame extends JFrame{
 
 	
+	
+private	 String a="",b="",c="",d="";
+	
 private JPanel contentPane;
 private FlowLayout layout;
 
@@ -25,6 +28,8 @@ private JTabbedPane tabbedPane;
 //save
 File saveFile=new File("config.txt");
 private int save_width = 0;
+private String npath="";
+private String nsolar="";
 	
 
 
@@ -38,8 +43,8 @@ private JButton nutchParameterSwitch;
 private JComboBox depth,width;
 private final String [] depthParameter={"2","3","4","5"};
 private final String [] widthParameter={"100","1000","10000"};
-private int nutch_width;
-private int nutch_depth;
+private int nutch_width = 100;
+private int nutch_depth = 5;
 
 //end nutch
 
@@ -76,6 +81,18 @@ private JLabel  sold_out_count;
 //system
 private JPanel contentPane_system;
 
+//path
+private JPanel contentPane_path;
+private JTextField  pathField;
+private JButton pathSwitchOn;
+private JButton pathSwitchClose;
+
+
+//solar
+private JPanel contentPane_Solar;
+private JTextField  solarField;
+private JButton solarSwitchOn;
+private JButton solarSwitchClose;
 
 //end system
 private AdminSystem system;
@@ -91,38 +108,152 @@ public 	MasterFrame()
 	     BufferedReader br = new BufferedReader(new FileReader("config.txt"));
 	     String line;
 	     line = br.readLine();
+	     while(line != null)
+	     {
+	    	 if(line.length()>12){
+	    	 store = line.substring(0,11);
+	    	 if(store.compareTo("nutch_depth")==0 ) {
+	    		 a=line;
+	    		 num = line.substring(12);
+		    	 nutch_depth=Integer.parseInt(num);
+		     }
+	    	 else if(store.compareTo("nutch_width")==0 ) {
+	    		 b=line;
+	    		 num = line.substring(12);
+		    	 nutch_width=Integer.parseInt(num);		    	 
+		    	 for(i=1;i<(nutch_width/100);i=i*10){
+		    		 save_width++;		    		 
+		    	 }
+	    	 }
+	    	 else if(store.compareTo("nutch_npath")==0) {
+	    		 c=line;
+	    		 npath = line.substring(12);
+	    	 }
+	    	 else if(store.compareTo("solar_npath")==0) {
+	    		 d=line;
+	    		 nsolar = line.substring(12);
+	    	 }
+	     }
+	    	 line = br.readLine();
+	     
+	     }
+	     
+	     System.out.println(a);
+	     System.out.println(b);
+	     System.out.println(c);
+	     System.out.println(d);
+	     
+	     
+	     /*
+	     line = br.readLine();
 	     store = line.substring(0,11);
 	    	 if(store.compareTo("nutch_depth")==0) {
+	    		 a=line;
 	    		 num = line.substring(12);
 		    	 nutch_depth=Integer.parseInt(num);
 		     }
 	    	 else if(store.compareTo("nutch_width")==0) {
+	    		 b=line;
 	    		 num = line.substring(12);
 		    	 nutch_width=Integer.parseInt(num);		    	 
 		    	 for(i=1;i<(nutch_width/100);i=i*10){
 		    		 save_width++;		    		 
 		    	 }
 	    	 }
-	    	 line = br.readLine();
-	    	 store = line.substring(0,11);
-		     if(store.compareTo("nutch_depth")==0) {
-	    		 num = line.substring(12);
-		    	 nutch_depth=Integer.parseInt(num);
-		     }
-	    	 else if(store.compareTo("nutch_width")==0) {
-	    		 num = line.substring(12);
-		    	 nutch_width=Integer.parseInt(num);		    	 
-		    	 for(i=1;i<(nutch_width/100);i=i*10){
-		    		 save_width++;		    		 
-		    	 }
+	    	 else if(store.compareTo("nutch_npath")==0) {
+	    		 c=line;
+	    		 npath = line.substring(12);
+	    	 }
+	    	 else if(store.compareTo("solar_npath")==0) {
+	    		 d=line;
+	    		 nsolar = line.substring(12);
 	    	 }
 	    	 
+	    	 
+	    	 line = br.readLine();
+	    	 store = line.substring(0,11);
+	    	 if(store.compareTo("nutch_depth")==0) {
+	    		 a=line;
+	    		 num = line.substring(12);
+		    	 nutch_depth=Integer.parseInt(num);
+		     }
+	    	 else if(store.compareTo("nutch_width")==0) {
+	    		 b=line;
+	    		 num = line.substring(12);
+		    	 nutch_width=Integer.parseInt(num);		    	 
+		    	 for(i=1;i<(nutch_width/100);i=i*10){
+		    		 save_width++;		    		 
+		    	 }
+	    	 }
+	    	 else if(store.compareTo("nutch_npath")==0) {
+	    		 c=line;
+	    		 npath = line.substring(12);
+	    	 }
+	    	 else if(store.compareTo("solar_npath")==0) {
+	    		 d=line;
+	    		 nsolar = line.substring(12);
+	    	 }
+		     
+		     
+		     line = br.readLine();
+	    	 store = line.substring(0,11);
+	    	 if(store.compareTo("nutch_depth")==0) {
+	    		 a=line;
+	    		 num = line.substring(12);
+		    	 nutch_depth=Integer.parseInt(num);
+		     }
+	    	 else if(store.compareTo("nutch_width")==0) {
+	    		 b=line;
+	    		 num = line.substring(12);
+		    	 nutch_width=Integer.parseInt(num);		    	 
+		    	 for(i=1;i<(nutch_width/100);i=i*10){
+		    		 save_width++;		    		 
+		    	 }
+	    	 }
+	    	 else if(store.compareTo("nutch_npath")==0) {
+	    		 c=line;
+	    		 npath = line.substring(12);
+	    	 }
+	    	 else if(store.compareTo("solar_npath")==0) {
+	    		 d=line;
+	    		 nsolar = line.substring(12);
+	    	 }
+	    	 
+	    	 line = br.readLine();
+	    	 store = line.substring(0,11);
+	    	 if(store.compareTo("nutch_depth")==0) {
+	    		 a=line;
+	    		 num = line.substring(12);
+		    	 nutch_depth=Integer.parseInt(num);
+		     }
+	    	 else if(store.compareTo("nutch_width")==0) {
+	    		 b=line;
+	    		 num = line.substring(12);
+		    	 nutch_width=Integer.parseInt(num);		    	 
+		    	 for(i=1;i<(nutch_width/100);i=i*10){
+		    		 save_width++;		    		 
+		    	 }
+	    	 }
+	    	 else if(store.compareTo("nutch_npath")==0) {
+	    		 c=line;
+	    		 npath = line.substring(12);
+	    	 }
+	    	 else if(store.compareTo("solar_npath")==0) {
+	    		 d=line;
+	    		 nsolar = line.substring(12);
+	    	 }*/
+	    	 
+	    	 a = a + "\n";
+	    	 b = b + "\n";
+	    	 c = c + "\n";
+	    	 d = d + "\n";
 	    	 
 		    
 		     br.close();
 		    }
 		catch (IOException e) {
-		     e.printStackTrace();
+			nutch_width = 100;
+		     nutch_depth = 5;
 		    }	
 			
 		setTitle("Cloud 管理介面");
@@ -219,14 +350,16 @@ public 	MasterFrame()
 						depth.setVisible(false);
 						width.setVisible(false);
 						
-						String a = "nutch_depth:"+Integer.toString(nutch_depth) + "\n";
-						String b = "nutch_width:"+Integer.toString(nutch_width) + "\n";
+						a = "nutch_depth:"+Integer.toString(nutch_depth) + "\n";
+						b = "nutch_width:"+Integer.toString(nutch_width) + "\n";
 						
 						try
 					    {
 					      FileWriter fwriter=new FileWriter(saveFile);
 					      fwriter.write(a);
 					      fwriter.write(b);
+					      fwriter.write(c);
+					      fwriter.write(d);
 					      fwriter.close();
 					    }
 					    catch(Exception e)
@@ -276,6 +409,140 @@ public 	MasterFrame()
 				contentPane_system.setBorder(titled);
 				contentPane_system.add(sold_out_count);
 				
+				
+		//path panel
+				contentPane_path= new JPanel(new GridLayout(3,1));
+				contentPane_path.setBorder(new EmptyBorder(15, 15, 15, 15));
+		
+				pathField = new JTextField(npath,25);
+				pathField.setEditable(false);
+				pathSwitchOn=new JButton("更改");
+				pathSwitchClose=new JButton("完成");
+				pathSwitchClose.setEnabled(false);
+								
+				JPanel panel_Path = new JPanel(new GridLayout(2,1));	
+				JPanel panel_Path1 = new JPanel(new GridLayout(1,2));
+				panel_Path1.add(pathSwitchOn);
+				panel_Path1.add(pathSwitchClose);
+				panel_Path.add(panel_Path1);
+				panel_Path.add(pathField);
+				
+				TitledBorder titled1;
+				titled1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.red), "NUTCH_PATH");
+				titled1.setTitleJustification(TitledBorder.LEFT);
+				titled1.setTitlePosition(TitledBorder.DEFAULT_POSITION);
+				titled1.setTitleColor(Color.red);
+				
+				panel_Path.setBorder(titled1);
+				
+				this.contentPane_path.add(panel_Path);
+				
+				
+				pathSwitchOn.addActionListener(new ActionListener()
+			    {
+						// handle button event						
+						public void actionPerformed(ActionEvent event) {
+							pathSwitchClose.setEnabled(true);
+							pathSwitchOn.setEnabled(false);
+							pathField.setEditable(true);
+						}
+					}
+			    );
+				
+				pathSwitchClose.addActionListener(new ActionListener()
+			    {
+						// handle button event						
+						public void actionPerformed(ActionEvent event) {
+							pathSwitchOn.setEnabled(true);
+							pathSwitchClose.setEnabled(false);
+							pathField.setEditable(false);
+							
+							c = "nutch_npath:"+pathField.getText() + "\n";
+							
+							try
+						    {
+						      FileWriter fwriter=new FileWriter(saveFile);
+						      fwriter.write(a);
+						      fwriter.write(b);
+						      fwriter.write(c);
+						      fwriter.write(d);
+						      fwriter.close();
+						    }
+						    catch(Exception e)
+						    {
+						      e.printStackTrace();
+						    }
+							
+						}
+					}
+			    );
+				
+				
+		//solar path
+				solarField = new JTextField(nsolar,25);
+				solarField.setEditable(false);
+				solarSwitchOn=new JButton("更改");
+				solarSwitchClose=new JButton("完成");
+				solarSwitchClose.setEnabled(false);
+								
+				JPanel solar_Path = new JPanel(new GridLayout(2,1));	
+				JPanel solar_Path1 = new JPanel(new GridLayout(1,2));
+				solar_Path1.add(solarSwitchOn);
+				solar_Path1.add(solarSwitchClose);
+				solar_Path.add(solar_Path1);
+				solar_Path.add(solarField);
+				
+				TitledBorder titled2;
+				titled2 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.red), "SOLAR_PATH");
+				titled2.setTitleJustification(TitledBorder.LEFT);
+				titled2.setTitlePosition(TitledBorder.DEFAULT_POSITION);
+				titled2.setTitleColor(Color.red);
+				
+				solar_Path.setBorder(titled2);
+				
+				this.contentPane_path.add(solar_Path);
+				
+				
+				solarSwitchOn.addActionListener(new ActionListener()
+			    {
+						// handle button event						
+						public void actionPerformed(ActionEvent event) {
+							solarSwitchClose.setEnabled(true);
+							solarSwitchOn.setEnabled(false);
+							solarField.setEditable(true);
+						}
+					}
+			    );
+				
+				solarSwitchClose.addActionListener(new ActionListener()
+			    {
+						// handle button event						
+						public void actionPerformed(ActionEvent event) {
+							solarSwitchOn.setEnabled(true);
+							solarSwitchClose.setEnabled(false);
+							solarField.setEditable(false);
+							
+							d = "solar_npath:"+solarField.getText() + "\n";
+							
+							try
+						    {
+						      FileWriter fwriter=new FileWriter(saveFile);
+						      fwriter.write(a);
+						      fwriter.write(b);
+						      fwriter.write(c);
+						      fwriter.write(d);
+						      fwriter.close();
+						    }
+						    catch(Exception e)
+						    {
+						      e.printStackTrace();
+						    }
+							
+						}
+					}
+			    );
+				
+				
 				//end system panel
 		//endless
 		contentPane_endless= new JPanel(new GridLayout(3,1));
@@ -297,12 +564,12 @@ public 	MasterFrame()
 		timer_Counter_panel.add(counterSwitch);
 		timer_Counter_panel.add(counterUpdate);
 		
-		titled = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.red), this.Stat_Endless_Str[0]);
-		titled.setTitleJustification(TitledBorder.LEFT);
-		titled.setTitlePosition(TitledBorder.DEFAULT_POSITION);
-		titled.setTitleColor(Color.red);
+		titled1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.red), this.Stat_Endless_Str[0]);
+		titled1.setTitleJustification(TitledBorder.LEFT);
+		titled1.setTitlePosition(TitledBorder.DEFAULT_POSITION);
+		titled1.setTitleColor(Color.red);
 		
-		timer_Counter_panel.setBorder(titled);
+		timer_Counter_panel.setBorder(titled1);
 		contentPane_endless.add(timer_Counter_panel);
 		
 		timer_Changer_panel = new JPanel(new GridLayout(1,5));
@@ -315,11 +582,11 @@ public 	MasterFrame()
 		
 		contentPane_endless.add(timer_Changer_panel);
 		
-		titled = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.red), this.Stat_Endless_Str[1]);
-		titled.setTitleJustification(TitledBorder.LEFT);
-		titled.setTitlePosition(TitledBorder.DEFAULT_POSITION);
-		titled.setTitleColor(Color.red);
-		timer_Changer_panel.setBorder(titled);
+		titled1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.red), this.Stat_Endless_Str[1]);
+		titled1.setTitleJustification(TitledBorder.LEFT);
+		titled1.setTitlePosition(TitledBorder.DEFAULT_POSITION);
+		titled1.setTitleColor(Color.red);
+		timer_Changer_panel.setBorder(titled1);
 		
 		nutch_parameter_stat_panel= new JPanel(new GridLayout(1,4));
 		this.nutch_depth_stat=new JLabel(Integer.toString(nutch_depth));
@@ -332,11 +599,11 @@ public 	MasterFrame()
 		
 		contentPane_endless.add(nutch_parameter_stat_panel);
 		
-		titled = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.red), this.Stat_Endless_Str[2]);
-		titled.setTitleJustification(TitledBorder.LEFT);
-		titled.setTitlePosition(TitledBorder.DEFAULT_POSITION);
-		titled.setTitleColor(Color.red);
-		nutch_parameter_stat_panel.setBorder(titled);
+		titled1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.red), this.Stat_Endless_Str[2]);
+		titled1.setTitleJustification(TitledBorder.LEFT);
+		titled1.setTitlePosition(TitledBorder.DEFAULT_POSITION);
+		titled1.setTitleColor(Color.red);
+		nutch_parameter_stat_panel.setBorder(titled1);
 		
 		//listener
 		
@@ -425,6 +692,7 @@ public 	MasterFrame()
 		tabbedPane.addTab("Nutch", null, this.contentPane_nutch, null);
 		//tabbedPane.addTab("Solr", null, this.contentPane_solr, null);
 		tabbedPane.addTab("System", null, this.contentPane_system, null);
+		tabbedPane.addTab("Path", null, this.contentPane_path, null);
 		tabbedPane.setSelectedIndex(0);
 		this.setContentPane(tabbedPane);
 		 //layout.layoutContainer( tabbedPane);

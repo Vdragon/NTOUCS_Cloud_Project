@@ -1,2 +1,4 @@
-nutch_depth:2
+nutch_depth:4
 nutch_width:10000
+nutch_npath:/opt/nutch
+solar_npath:/opt/tomcat7
