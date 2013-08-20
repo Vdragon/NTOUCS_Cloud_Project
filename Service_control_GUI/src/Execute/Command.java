@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Command
 {
 	private	 String c="",d="";
-	private String npath="",nsolar="";
+	private static String npath="",nsolar="";
 	private Exec cmd =null;
 	
 	public Command()
