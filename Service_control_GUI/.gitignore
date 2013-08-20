@@ -13,3 +13,6 @@ bin/
 
 # Eclipse IDE
 .metadata/
+
+# 不追蹤可自動產生的設定檔
+config.txt
