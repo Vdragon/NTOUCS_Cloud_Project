@@ -13,12 +13,8 @@ public class Command
 {
 	private	 String c="",d="";
 	private String npath="",nsolar="";
-	
-	
-	
-	
-	
 	private Exec cmd =null;
+	
 	public Command()
 	{
 		cmd=new Exec();
@@ -180,7 +176,5 @@ public class Command
 		cmd.exex(npath+"/bin/hadoop fs -rmr /"+targetDir);
 		cmd.exex(npath+"/bin/hadoop fs -mkdir /"+targetDir);
 		cmd.exex(npath+"/bin/hadoop fs -mv /"+sourceDir+"/* /"+targetDir+"");
-		
-}	
-	
+	}	
 }
