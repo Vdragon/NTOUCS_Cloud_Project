@@ -30,7 +30,7 @@ public class PHPMysql
 			Class.forName("com.mysql.jdbc.Driver"); 
 			//註冊driver 
 			con = (Connection) DriverManager.getConnection( 
-					"jdbc:mysql://localhost:3306/CloudHouse?useUnicode=true&characterEncoding=UTF-8", 
+					"jdbc:mysql://localhost:3306/cloud?useUnicode=true&characterEncoding=UTF-8", 
 					"root","ntoucs"); 
 			//取得connection
 		} 

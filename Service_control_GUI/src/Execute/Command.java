@@ -11,9 +11,10 @@ import java.util.ArrayList;
 
 public class Command
 {
-	private String npath="",nsolar="";
-	
+	private	 String c="",d="";
+	private static String npath="",nsolar="";
 	private Exec cmd =null;
+	
 	public Command()
 	{
 		cmd=new Exec();
@@ -167,7 +168,5 @@ public class Command
 		cmd.exex(npath+"/bin/hadoop fs -rmr /"+targetDir);
 		cmd.exex(npath+"/bin/hadoop fs -mkdir /"+targetDir);
 		cmd.exex(npath+"/bin/hadoop fs -mv /"+sourceDir+"/* /"+targetDir+"");
-		
-}	
-	
+	}	
 }

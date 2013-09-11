@@ -72,7 +72,7 @@ public class TimerLabel extends JLabel {
 				//crawl.CreateNewDir_Solr();
 				
 				this.resetTimer();
-				crawl.delete_HDFS("/user/hadooper/urls");
+				crawl.delete_HDFS("urls");
 				
 				crawl.Upload_HDFS("/opt/nutch/urls", "urls");
 				

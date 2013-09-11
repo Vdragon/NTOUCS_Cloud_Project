@@ -38,7 +38,7 @@ public class AdminSystemHelper_Timer extends Thread{
 		systemTimer.resetTimer();
 		systemSwitchButton.setVisible(false);
 	
-		system.delete_HDFS("/user/hadooper/urls");
+		system.delete_HDFS("urls");
 		
 		system.Upload_HDFS("/opt/nutch/urls", "urls");
 		
