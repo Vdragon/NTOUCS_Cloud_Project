@@ -26,6 +26,7 @@ class MyLogin extends JFrame implements ActionListener
 		
 		usernameLabel = new JLabel("管理者帳號:",SwingConstants.CENTER);
 		usernameField = new JTextField(15);
+		usernameField.addActionListener(this);
 
 		passwordLabel = new JLabel("管理者密碼:",SwingConstants.CENTER);
 		passwordField = new JPasswordField(15);
@@ -59,6 +60,13 @@ class MyLogin extends JFrame implements ActionListener
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setVisible(true);
+		
+		//now there is no use to use password or user name
+		this.setVisible(false);			
+		father.setVisible(true);			
+		this.dispose();		
+		//now there is no use to use password or user name
+		
 	}
     public void actionPerformed(ActionEvent ee)
 	{
