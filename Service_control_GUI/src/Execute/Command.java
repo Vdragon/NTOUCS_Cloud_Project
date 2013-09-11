@@ -11,12 +11,7 @@ import java.util.ArrayList;
 
 public class Command
 {
-	private	 String c="",d="";
 	private String npath="",nsolar="";
-	
-	
-	
-	
 	
 	private Exec cmd =null;
 	public Command()
@@ -55,11 +50,9 @@ public class Command
 		    	 if(line.length()>12){
 		    	 store = line.substring(0,11);
 		    	 if(store.compareTo("nutch_npath")==0) {
-		    		 c=line;
 		    		 npath = line.substring(12);
 		    	 }
 		    	 else if(store.compareTo("solar_npath")==0) {
-		    		 d=line;
 		    		 nsolar = line.substring(12);
 		    	 }
 		     }
@@ -67,8 +60,6 @@ public class Command
 		     
 		     }
 		    	
-		    	 c = c + "\n";
-		    	 d = d + "\n";
 
 			     br.close();
 			    }
@@ -121,11 +112,9 @@ public class Command
 		    	 if(line.length()>12){
 		    	 store = line.substring(0,11);
 		    	 if(store.compareTo("nutch_npath")==0) {
-		    		 c=line;
 		    		 npath = line.substring(12);
 		    	 }
 		    	 else if(store.compareTo("solar_npath")==0) {
-		    		 d=line;
 		    		 nsolar = line.substring(12);
 		    	 }
 		     }
@@ -133,8 +122,6 @@ public class Command
 		     
 		     }
 		    	
-		    	 c = c + "\n";
-		    	 d = d + "\n";
 
 			     br.close();
 			    }
