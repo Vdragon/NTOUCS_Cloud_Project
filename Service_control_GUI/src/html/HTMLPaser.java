@@ -38,7 +38,7 @@ public class HTMLPaser
 		
 		LonLat=new double[2];
 		houseInfo=new ArrayList();
-		this.setHouseAngency(this.getRealtor(this.houseURL));
+		this.setHouseAngency(this.getRealtor(this.houseURL));  //search for house name
 		this.html_ok=true;
 		System.out.print("end doing!");
 	}
@@ -104,8 +104,8 @@ public class HTMLPaser
 	{
 		
 		this.findHouseLonLat();
-		this.findHouseAttitude();
-		this.findHouseImage();
+		this.findHouseAttitude();//detail of house
+		this.findHouseImage();   //image of house
 		ArrayList tmp=new ArrayList();
 		tmp.add("OrginURL:");
 		tmp.add(this.houseURL);
