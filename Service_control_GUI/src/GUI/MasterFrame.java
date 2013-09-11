@@ -16,8 +16,9 @@ public class MasterFrame extends JFrame{
 
 	
 	
-private	 String a="",b="",c="",d="";
-	
+
+private	 String store_depth="",store_width="",store_npath="",store_solar="";
+
 private JPanel contentPane;
 private FlowLayout layout;
 
@@ -113,12 +114,12 @@ public 	MasterFrame()
 	    	 if(line.length()>12){
 	    	 store = line.substring(0,11);
 	    	 if(store.compareTo("nutch_depth")==0 ) {
-	    		 a=line;
+	    		 store_depth=line;
 	    		 num = line.substring(12);
 		    	 nutch_depth=Integer.parseInt(num);
 		     }
 	    	 else if(store.compareTo("nutch_width")==0 ) {
-	    		 b=line;
+	    		 store_width=line;
 	    		 num = line.substring(12);
 		    	 nutch_width=Integer.parseInt(num);		    	 
 		    	 for(i=1;i<(nutch_width/100);i=i*10){
@@ -126,11 +127,11 @@ public 	MasterFrame()
 		    	 }
 	    	 }
 	    	 else if(store.compareTo("nutch_npath")==0) {
-	    		 c=line;
+	    		 store_npath=line;
 	    		 npath = line.substring(12);
 	    	 }
 	    	 else if(store.compareTo("solar_npath")==0) {
-	    		 d=line;
+	    		 store_solar=line;
 	    		 nsolar = line.substring(12);
 	    	 }
 	     }
@@ -138,10 +139,10 @@ public 	MasterFrame()
 	     
 	     }
 	     
-	     System.out.println(a);
-	     System.out.println(b);
-	     System.out.println(c);
-	     System.out.println(d);
+	     System.out.println(store_depth);
+	     System.out.println(store_width);
+	     System.out.println(store_npath);
+	     System.out.println(store_solar);
 	     
 	     
 	     /*
@@ -168,85 +169,12 @@ public 	MasterFrame()
 	    		 d=line;
 	    		 nsolar = line.substring(12);
 	    	 }
+	    	 */
 	    	 
-	    	 
-	    	 line = br.readLine();
-	    	 store = line.substring(0,11);
-	    	 if(store.compareTo("nutch_depth")==0) {
-	    		 a=line;
-	    		 num = line.substring(12);
-		    	 nutch_depth=Integer.parseInt(num);
-		     }
-	    	 else if(store.compareTo("nutch_width")==0) {
-	    		 b=line;
-	    		 num = line.substring(12);
-		    	 nutch_width=Integer.parseInt(num);		    	 
-		    	 for(i=1;i<(nutch_width/100);i=i*10){
-		    		 save_width++;		    		 
-		    	 }
-	    	 }
-	    	 else if(store.compareTo("nutch_npath")==0) {
-	    		 c=line;
-	    		 npath = line.substring(12);
-	    	 }
-	    	 else if(store.compareTo("solar_npath")==0) {
-	    		 d=line;
-	    		 nsolar = line.substring(12);
-	    	 }
-		     
-		     
-		     line = br.readLine();
-	    	 store = line.substring(0,11);
-	    	 if(store.compareTo("nutch_depth")==0) {
-	    		 a=line;
-	    		 num = line.substring(12);
-		    	 nutch_depth=Integer.parseInt(num);
-		     }
-	    	 else if(store.compareTo("nutch_width")==0) {
-	    		 b=line;
-	    		 num = line.substring(12);
-		    	 nutch_width=Integer.parseInt(num);		    	 
-		    	 for(i=1;i<(nutch_width/100);i=i*10){
-		    		 save_width++;		    		 
-		    	 }
-	    	 }
-	    	 else if(store.compareTo("nutch_npath")==0) {
-	    		 c=line;
-	    		 npath = line.substring(12);
-	    	 }
-	    	 else if(store.compareTo("solar_npath")==0) {
-	    		 d=line;
-	    		 nsolar = line.substring(12);
-	    	 }
-	    	 
-	    	 line = br.readLine();
-	    	 store = line.substring(0,11);
-	    	 if(store.compareTo("nutch_depth")==0) {
-	    		 a=line;
-	    		 num = line.substring(12);
-		    	 nutch_depth=Integer.parseInt(num);
-		     }
-	    	 else if(store.compareTo("nutch_width")==0) {
-	    		 b=line;
-	    		 num = line.substring(12);
-		    	 nutch_width=Integer.parseInt(num);		    	 
-		    	 for(i=1;i<(nutch_width/100);i=i*10){
-		    		 save_width++;		    		 
-		    	 }
-	    	 }
-	    	 else if(store.compareTo("nutch_npath")==0) {
-	    		 c=line;
-	    		 npath = line.substring(12);
-	    	 }
-	    	 else if(store.compareTo("solar_npath")==0) {
-	    		 d=line;
-	    		 nsolar = line.substring(12);
-	    	 }*/
-	    	 
-	    	 a = a + "\n";
-	    	 b = b + "\n";
-	    	 c = c + "\n";
-	    	 d = d + "\n";
+	     store_depth = store_depth + "\n";
+	     store_width = store_width + "\n";
+	     store_npath = store_npath + "\n";
+	     store_solar = store_solar + "\n";
 	    	 
 		    
 		     br.close();
@@ -350,16 +278,16 @@ public 	MasterFrame()
 						depth.setVisible(false);
 						width.setVisible(false);
 						
-						a = "nutch_depth:"+Integer.toString(nutch_depth) + "\n";
-						b = "nutch_width:"+Integer.toString(nutch_width) + "\n";
+						store_depth = "nutch_depth:"+Integer.toString(nutch_depth) + "\n";
+						store_width = "nutch_width:"+Integer.toString(nutch_width) + "\n";
 						
 						try
 					    {
 					      FileWriter fwriter=new FileWriter(saveFile);
-					      fwriter.write(a);
-					      fwriter.write(b);
-					      fwriter.write(c);
-					      fwriter.write(d);
+					      fwriter.write(store_depth);
+					      fwriter.write(store_width);
+					      fwriter.write(store_npath);
+					      fwriter.write(store_solar);
 					      fwriter.close();
 					    }
 					    catch(Exception e)
@@ -457,15 +385,15 @@ public 	MasterFrame()
 							pathSwitchClose.setEnabled(false);
 							pathField.setEditable(false);
 							
-							c = "nutch_npath:"+pathField.getText() + "\n";
+							store_npath = "nutch_npath:"+pathField.getText() + "\n";
 							
 							try
 						    {
 						      FileWriter fwriter=new FileWriter(saveFile);
-						      fwriter.write(a);
-						      fwriter.write(b);
-						      fwriter.write(c);
-						      fwriter.write(d);
+						      fwriter.write(store_depth);
+						      fwriter.write(store_width);
+						      fwriter.write(store_npath);
+						      fwriter.write(store_solar);
 						      fwriter.close();
 						    }
 						    catch(Exception e)
@@ -522,15 +450,15 @@ public 	MasterFrame()
 							solarSwitchClose.setEnabled(false);
 							solarField.setEditable(false);
 							
-							d = "solar_npath:"+solarField.getText() + "\n";
+							store_solar = "solar_npath:"+solarField.getText() + "\n";
 							
 							try
 						    {
 						      FileWriter fwriter=new FileWriter(saveFile);
-						      fwriter.write(a);
-						      fwriter.write(b);
-						      fwriter.write(c);
-						      fwriter.write(d);
+						      fwriter.write(store_depth);
+						      fwriter.write(store_width);
+						      fwriter.write(store_npath);
+						      fwriter.write(store_solar);
 						      fwriter.close();
 						    }
 						    catch(Exception e)
