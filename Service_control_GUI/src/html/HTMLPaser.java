@@ -52,8 +52,10 @@ public class HTMLPaser
 		String etw = null;
 		if(this.houseAgency.endsWith("台灣房屋"))
 		{
-			tw = doc.select("meta").get(2).absUrl("http-equiv").toString();
-			if(tw.endsWith("http://www.twhg.com.tw/refresh"))
+			tw = doc.select("meta").get(2).attr("http-equiv").toString();
+			
+			System.out.println(tw);
+			if(tw.endsWith("refresh"))
 			{
 				urlLost[0]++;
 				return false;}
