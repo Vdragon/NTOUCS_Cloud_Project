@@ -7,7 +7,7 @@ public class HouseTxt
 {
   public void ToTxt(ArrayList data) 
   {
-	  File saveFile=new File("/opt/tmp/houseinfo.txt");
+	  File saveFile=new File("/tmp/houseinfo.txt");
 	  try
 	    {
 	      FileWriter fwriter=new FileWriter(saveFile);

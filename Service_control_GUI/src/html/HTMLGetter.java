@@ -84,7 +84,7 @@ public class HTMLGetter {
 		deleteTmp.delete_TmpImage();
 		ImageDownload t=new ImageDownload();
 		for(int i=0;i<tmp.length;i++)
-			t.saveImage(tmp[i],"/opt/tmp/image/"+(i+1)+".jpg");
+			t.saveImage(tmp[i],"/opt/nutch/tmp/image/"+(i+1)+".jpg");
 	
 		
 	}
@@ -133,7 +133,7 @@ public class HTMLGetter {
 	private void hosueHDFSUpload(int id)
 	{
 		Command t =new Command();
-		t.Upload_HDFS("/opt/tmp", "/HouseTmp/"+id);
+		t.Upload_HDFS("/opt/nutch/tmp", "/HouseTmp/"+id);
 	}
 	private void houseXmlPaser(ArrayList tmp)
 	{

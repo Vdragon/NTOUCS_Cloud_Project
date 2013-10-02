@@ -89,8 +89,8 @@ public class Command
 
 	public void delete_TmpImage()
 	{
-		cmd.exex("rm -r /opt/tmp/image");
-		cmd.exex("mkdir /opt/tmp/image");
+		cmd.exex("rm -r /opt/nutch/tmp/image");
+		cmd.exex("mkdir /opt/nutch/tmp/image");
 	}
 	public void C_Ctrl()
 	{
