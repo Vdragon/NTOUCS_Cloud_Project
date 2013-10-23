@@ -80,6 +80,32 @@ public class Command
 	}
 	public void Upload_HDFS(String filePath,String targetPath)
 	{
+		try {
+			 String store;			
+		     BufferedReader br = new BufferedReader(new FileReader("config.txt"));
+		     String line;
+		     line = br.readLine();
+		     while(line != null)
+		     {
+		    	 if(line.length()>12){
+		    	 store = line.substring(0,11);
+		    	 if(store.compareTo("nutch_npath")==0) {
+		    		 npath = line.substring(12);
+		    	 }
+		    	 else if(store.compareTo("solar_npath")==0) {
+		    		 nsolar = line.substring(12);
+		    	 }
+		     }
+		    	 line = br.readLine();
+		     
+		     }
+		    	
+
+			     br.close();
+			    }
+				catch (IOException e) {
+			     e.printStackTrace();
+			    }	
 		cmd.exex(npath+"/bin/hadoop fs -put "+filePath+" "+targetPath);
 	}
 	public void delete_HDFS(String filePath)
