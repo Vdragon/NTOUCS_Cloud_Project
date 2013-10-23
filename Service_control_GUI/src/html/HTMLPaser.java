@@ -104,7 +104,7 @@ public class HTMLPaser
 	public void paseHTML() throws Exception
 	{
 		
-		this.findHouseLonLat();
+		//this.findHouseLonLat();
 		this.findHouseAttitude();//detail of house
 		this.findHouseImage();   //image of house
 		ArrayList tmp=new ArrayList();
