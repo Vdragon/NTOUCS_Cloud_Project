@@ -21,11 +21,12 @@ public class HTMLGetterTest {
 		Solr tmp=new Solr();
 		tmp.defaultRun();
 		HTMLGetter test=new HTMLGetter(tmp.getCheckedURL()); 
-	
+		
+		
 		//test.totalHtmlPase();
 		try
 		{
-			test.htmlPase("http://www.google.com",1);
+			test.htmlPase("http://www.twhg.com.tw/object.php?obj=TF01251976",1);
 		}
 		catch(Exception e)
 		{
