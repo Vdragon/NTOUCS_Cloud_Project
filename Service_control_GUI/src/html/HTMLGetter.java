@@ -72,9 +72,7 @@ public class HTMLGetter {
 			this.houseInfoDownload(t.getHouseInfo());
 			
 			int id =this.houseMysqlUpload(t.getHouseInfo());
-			
 			this.hosueHDFSUpload(id);
-			
 			this.houseXmlPaser(t.getHouseInfo());
 		}
 	}
