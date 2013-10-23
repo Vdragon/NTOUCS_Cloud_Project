@@ -41,12 +41,14 @@ public class ImageDownload
 				try 
 				{
 					this.letSDownLoad(savepath);
+					System.out.print(imageURL); 	//james_written 
 					getImage=true;
 				} catch (Exception e)
 				{
 					getImage=false;
 					imageURL="http://www.etwarm.com.tw/images/pic_error.jpg";
 					System.out.print("image can not found!!\n");
+					break;
 				}
 			}
 		}
