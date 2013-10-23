@@ -40,7 +40,6 @@ public class HTMLPaser
 		houseInfo=new ArrayList();
 		this.setHouseAngency(this.getRealtor(this.houseURL));  //search for house name
 		this.html_ok=true;
-		System.out.print("end doing!");
 	}
 	public boolean get_html_ok()
 	{
