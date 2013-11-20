@@ -11,8 +11,9 @@ public class HTMLPasertest {
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		//HTMLPaser test=new HTMLPaser("https://www.hotcar.com.tw/CWA/CWA060.aspx?TSEQNO=83058");
 		
-		HTMLPaser test=new HTMLPaser("http://www.twhg.com.tw/object.php?obj=TA09941517");
+		HTMLPaser test=new HTMLPaser("http://auto.8891.com.tw/usedauto-infos-340734.html");
 		test.html_try();	
 		try {
 			test.paseHTML();

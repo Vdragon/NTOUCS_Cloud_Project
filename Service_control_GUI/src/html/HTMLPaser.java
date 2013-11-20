@@ -138,6 +138,10 @@ public class HTMLPaser
 		{
 			return "中信房屋";
 		}
+		else if(url.indexOf("8891")>0)
+		{
+			return "8891交易網";
+		}
 		return "";
 	}
 
@@ -165,6 +169,14 @@ public class HTMLPaser
 				if(image.hasNext())
 					imageURL[(i-72)]=image.next().absUrl("src").toString();		
 			}*/
+		}
+		
+		else if(this.houseAgency.endsWith("8891交易網"))
+		{
+			table = doc.select(".ti-wapper");
+			
+			gg.add(table.get(0).absUrl("src").toString());
+			
 		}
 		
 		else if(this.houseAgency.endsWith("台灣房屋"))
@@ -199,6 +211,69 @@ public class HTMLPaser
 		Element table=null;
 		Iterator<Element> ite =null;
 		ArrayList<String> tmp=new ArrayList<String>();
+		
+		
+		
+		 if(this.houseAgency.endsWith("8891交易網"))
+		{
+			 table = doc.select(".mb-info").get(0);
+			 ite = table.select("span").iterator();
+			 String[] str = new String[20];
+			 String str2 = "";
+			 int i = 0;
+			 while(ite.hasNext())
+			 {
+				 if(i > 6)
+					 break;
+				 str[i++] = ite.next().text();
+			 }
+			 table = table.select("#b_price").get(0);
+			 ite = table.select("div").iterator();
+			 str[i] = ite.next().text();
+			 str2 = str[6];
+			 str[6] = str2.substring(3, (str2.length()-2));
+			 for(i=0;i<7;i++)
+			 {
+				 System.out.println(str[i]);
+			 }
+			 tmp.add("廠牌：");
+			 tmp.add(str[0]);
+			 //System.out.println(str[11]);
+			 this.houseInfo.add(tmp);
+			 tmp=new ArrayList();
+			 tmp.add("售價 (萬)：");
+			 tmp.add(str[6]);
+			 //System.out.println(str[3]);
+			 this.houseInfo.add(tmp);
+			 tmp=new ArrayList();
+			 tmp.add("年份：");
+			 tmp.add(str[2]);
+			 //System.out.println(str[1]);
+			 this.houseInfo.add(tmp);
+			 tmp=new ArrayList();
+			 tmp.add("顏色：");
+			 tmp.add(str[3]);
+			// System.out.println(str[5]);
+			 this.houseInfo.add(tmp);
+			 tmp=new ArrayList();
+			 tmp.add("排量：");
+			 tmp.add(str[4]);
+			// System.out.println(str[15]);
+			 this.houseInfo.add(tmp);
+			 tmp=new ArrayList(); 
+			 tmp.add("地區：");
+			 tmp.add(str[5]);
+			// System.out.println(str[15]);
+			 this.houseInfo.add(tmp);
+			 tmp=new ArrayList();
+			 tmp.add("中古車：");
+	         tmp.add(this.houseAgency);
+	         this.houseInfo.add(tmp);
+	         tmp=new ArrayList();
+			 
+		}
+			 
+		
 		if(this.houseAgency.endsWith("東森房屋"))
 		{
 			int [][] rule={{19,21,20,23,36},{20,22,21,24,38}};
