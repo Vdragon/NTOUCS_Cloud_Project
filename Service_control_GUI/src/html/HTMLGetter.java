@@ -30,7 +30,7 @@ public class HTMLGetter {
 	{
 		totalURL=url;
 		newURL=new ArrayList();
-		urlLost = new int[3];
+		urlLost = new int[4];
 	}
 	public int [] get_urlLost()
 	{
