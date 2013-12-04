@@ -68,9 +68,9 @@ public class HTMLGetter {
 		{
 			t.paseHTML();
 			this.houseImageDownload(t.getHouseImageURL());
-			
+			System.out.println("1=====================================================");
 			this.houseInfoDownload(t.getHouseInfo());
-			
+			System.out.println("2=====================================================");
 			int id =this.houseMysqlUpload(t.getHouseInfo());
 			this.hosueHDFSUpload(id);
 			this.houseXmlPaser(t.getHouseInfo());
@@ -117,21 +117,21 @@ public class HTMLGetter {
 			System.err.println("money crash");
 			real_money=6666;
 		}
-		
-		
-		
-		t.insertTable(((ArrayList)tmp.get(5)).get(1).toString(),
-				((ArrayList)tmp.get(2)).get(1).toString().toString(),
-				((ArrayList)tmp.get(9)).get(1).toString().toString(),
+		t.insertTable(((ArrayList)tmp.get(0)).get(1).toString(),
+				((ArrayList)tmp.get(5)).get(1).toString().toString(),
+				((ArrayList)tmp.get(7)).get(1).toString().toString(),
 				real_money);
-		int re=t.getTitleID(((ArrayList)tmp.get(5)).get(1).toString());
+		int re=5;   //t.getTitleID(((ArrayList)tmp.get(7)).get(1).toString());
+		System.out.println("fffffffffffffffffffffffffff");
 		t.close();
 		return re;
 	}
 	private void hosueHDFSUpload(int id)
 	{
 		Command t =new Command();
+		System.out.println("====== 開始上傳至 HDFS ======");
 		t.Upload_HDFS("/opt/nutch/tmp", "/HouseTmp/"+id);
+		System.out.println("====== 開始上傳至 HDFS ======");
 	}
 	private void houseXmlPaser(ArrayList tmp)
 	{
