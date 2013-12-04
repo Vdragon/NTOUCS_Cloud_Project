@@ -49,6 +49,34 @@ public class HTMLPaser
 	{
 		String tw=null;
 		String etw = null;
+		
+		System.out.println("1111111111111");
+		
+		if(this.houseAgency.endsWith("HOT大聯盟"))
+		{
+			Element table=null;
+			Iterator<Element> ite =null;
+			table = doc.select("#ctl00_ContentPlaceHolder1_UpdatePanel1").get(0).select("table").get(3).select("tr").get(2);
+			ite = table.select("span").iterator();
+			tw = ite.next().text();
+			System.out.println(tw);
+			if(tw.length()==0)
+			{
+				urlLost[0]++;
+				return false;}
+		}
+		
+		
+		if(this.houseAgency.endsWith("8891交易網"))
+		{
+			tw = doc.select("meta").get(2).attr("content").toString();
+			
+			System.out.println(tw);
+			if(tw.startsWith("404"))
+			{
+				urlLost[0]++;
+				return false;}
+		}
 		if(this.houseAgency.endsWith("台灣房屋"))
 		{
 			tw = doc.select("meta").get(2).attr("http-equiv").toString();
@@ -142,6 +170,10 @@ public class HTMLPaser
 		{
 			return "8891交易網";
 		}
+		else if(url.indexOf("hotcar")>0)
+		{
+			return "HOT大聯盟";
+		}
 		return "";
 	}
 
@@ -171,12 +203,21 @@ public class HTMLPaser
 			}*/
 		}
 		
+		else if(this.houseAgency.endsWith("HOT大聯盟"))
+		{
+			table = doc.select(".bottom_dot2_RR");
+			String img = "";
+			img = "https://www.hotcar.com.tw" + table.get(0).select("img").attr("src").toString();
+			System.out.println(img);
+			gg.add(img);
+		}
+		
 		else if(this.houseAgency.endsWith("8891交易網"))
 		{
 			table = doc.select(".ti-wapper");
-			
-			gg.add(table.get(0).absUrl("src").toString());
-			
+			String img = "";
+			img = "http:" + table.get(0).select("img").attr("src").toString();
+			gg.add(img);
 		}
 		
 		else if(this.houseAgency.endsWith("台灣房屋"))
@@ -272,6 +313,79 @@ public class HTMLPaser
 	         tmp=new ArrayList();
 			 
 		}
+		 
+		 
+		 if(this.houseAgency.endsWith("HOT大聯盟"))
+			{
+				 table = doc.select("#ctl00_ContentPlaceHolder1_UpdatePanel1").get(0).select("table").get(3).select("tr").get(2);
+				 ite = table.select("span").iterator();
+				 String[] str = new String[20];
+				 String str2 = "";
+				 int i = 0;
+				 while(ite.hasNext())
+				 {
+					 if(i > 6)
+						 break;
+					 str[i++] = ite.next().text();
+				 }
+				 
+				 table = doc.select("#ctl00_ContentPlaceHolder1_lbSALAMT").get(0);
+				 ite = table.select("font").iterator();
+				 str[i++] = ite.next().text();			
+				 for(int a=0;a<str[i-1].length();a++)
+				 {
+					 if(str[i-1].charAt(a) != ',')
+					 str2 = str2 + str[i-1].charAt(a);
+				 }
+				 int wan = Integer.parseInt(str2);
+				 wan = wan / 10000;
+				 str[i-1] = Integer.toString(wan);
+				 
+				 table = doc.select(".bottom_dot2_R").get(1);
+				 ite = table.select("span").iterator();
+				 str[i++] = ite.next().text();	
+				 
+				 for(i=0;i<9;i++)
+				 {
+					 System.out.println(str[i]);
+				 }
+				 tmp.add("廠牌：");
+				 tmp.add(str[0]);
+				 //System.out.println(str[11]);
+				 this.houseInfo.add(tmp);
+				 tmp=new ArrayList();
+				 tmp.add("售價 (萬)：");
+				 tmp.add(str[7]);
+				 //System.out.println(str[3]);
+				 this.houseInfo.add(tmp);
+				 tmp=new ArrayList();
+				 tmp.add("年份：");
+				 tmp.add(str[2]);
+				 //System.out.println(str[1]);
+				 this.houseInfo.add(tmp);
+				 tmp=new ArrayList();
+				 tmp.add("顏色：");
+				 tmp.add(str[8]);
+				// System.out.println(str[5]);
+				 this.houseInfo.add(tmp);
+				 tmp=new ArrayList();
+				 tmp.add("排量：");
+				 tmp.add(str[3]);
+				// System.out.println(str[15]);
+				 this.houseInfo.add(tmp);
+				 tmp=new ArrayList(); 
+				 tmp.add("地區：");
+				 tmp.add(str[5]);
+				// System.out.println(str[15]);
+				 this.houseInfo.add(tmp);
+				 tmp=new ArrayList();
+				 tmp.add("中古車：");
+		         tmp.add(this.houseAgency);
+		         this.houseInfo.add(tmp);
+		         tmp=new ArrayList();
+				 
+			}
+		 
 			 
 		
 		if(this.houseAgency.endsWith("東森房屋"))

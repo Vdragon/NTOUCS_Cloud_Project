@@ -16,21 +16,23 @@ public class HTMLGetterTest {
 	 */
 	public static void main(String[] args) throws IOException
 	{
-		PrecreateXML pre = new PrecreateXML();
+		/*PrecreateXML pre = new PrecreateXML();
 		pre.CreateFile();
 		Solr tmp=new Solr();
-		tmp.defaultRun();
-		HTMLGetter test=new HTMLGetter(tmp.getCheckedURL()); 
+		tmp.defaultRun();*/
 		
+		
+		ArrayList checked_URL = new ArrayList();
+		HTMLGetter test=new HTMLGetter(checked_URL); 
 		
 		//test.totalHtmlPase();
 		try
 		{
-			test.htmlPase("http://www.twhg.com.tw/object.php?obj=TF01251976",1);
+			test.htmlPase("https://www.hotcar.com.tw/CWA/CWA060.aspx?TSEQNO=86697",1);
 		}
 		catch(Exception e)
 		{
-			System.err.print("153");
+			System.err.print("HTMLGetterTest.main  error!!\n");
 		}
 		
 	//	test.create_URLS();
