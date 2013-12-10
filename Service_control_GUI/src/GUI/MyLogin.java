@@ -81,7 +81,7 @@ class MyLogin extends JFrame implements ActionListener
 			//}
 		}
 		// send an option pane that does not match
-		JOptionPane.showMessageDialog(this, "帳號或密碼錯誤，請在試一次");
+		JOptionPane.showMessageDialog(this, "帳號或密碼錯誤，請再試一次");
 		this.usernameField.setText("");
 		this.passwordField.setText("");
 		
