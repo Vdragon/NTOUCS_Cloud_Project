@@ -286,6 +286,11 @@ public class HTMLPaser
 			 //System.out.println(str[11]);
 			 this.houseInfo.add(tmp);
 			 tmp=new ArrayList();
+			 tmp.add("車款：");
+			 tmp.add(str[1]);
+			 //System.out.println(str[3]);
+			 this.houseInfo.add(tmp);			 
+			 tmp=new ArrayList();
 			 tmp.add("售價 (萬)：");
 			 tmp.add(str[6]);
 			 //System.out.println(str[3]);
@@ -357,6 +362,12 @@ public class HTMLPaser
 				 tmp.add(str[0]);
 				 //System.out.println(str[11]);
 				 this.houseInfo.add(tmp);
+				 tmp=new ArrayList();
+				 tmp.add("車款：");
+				 tmp.add(str[1]);
+				 //System.out.println(str[3]);
+				 this.houseInfo.add(tmp);
+				 
 				 tmp=new ArrayList();
 				 tmp.add("售價 (萬)：");
 				 tmp.add(str[7]);

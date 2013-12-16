@@ -12,7 +12,7 @@ public class HTMLPasertest {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		//HTMLPaser test=new HTMLPaser("https://www.hotcar.com.tw/CWA/CWA060.aspx?TSEQNO=83058");
-		HTMLPaser test=new HTMLPaser("https://www.hotcar.com.tw/CWA/CWA060.aspx?TSEQNO=86697");
+		HTMLPaser test=new HTMLPaser("http://auto.8891.com.tw/usedauto-infos-381786.html");
 		test.html_try();	
 		try {
 			test.paseHTML();

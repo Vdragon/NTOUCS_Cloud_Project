@@ -107,21 +107,34 @@ public class HTMLGetter {
 			{
 				money+=(((ArrayList)tmp.get(1)).get(1).toString().toCharArray())[i];
 			}
-		}
-		int real_money;
+		}*/
+		float real_money;
+		int amoney;
+		int real_Year;
+		int real_Displacement;
+		real_Year=Integer.parseInt(((ArrayList)tmp.get(3)).get(1).toString());
+		real_Displacement=Integer.parseInt(((ArrayList)tmp.get(5)).get(1).toString());
 		try
 		{
-			real_money=Integer.parseInt(money)*10000;
+			real_money=Float.parseFloat(money)*10000;
 		}catch(Exception e)
 		{
 			System.err.println("money crash");
 			real_money=6666;
 		}
-		t.insertTable(((ArrayList)tmp.get(0)).get(1).toString(),
-				((ArrayList)tmp.get(5)).get(1).toString().toString(),
+		amoney = (int)real_money;
+		//name,Brands,company,Year,Displacement,Url,Address,Price,color
+		t.insertTable(((ArrayList)tmp.get(1)).get(1).toString(),
+				((ArrayList)tmp.get(0)).get(1).toString().toString(),
 				((ArrayList)tmp.get(7)).get(1).toString().toString(),
-				real_money);
-		int re=5;   //t.getTitleID(((ArrayList)tmp.get(7)).get(1).toString());
+				real_Year,
+				real_Displacement,
+				((ArrayList)tmp.get(8)).get(1).toString().toString(),
+				((ArrayList)tmp.get(6)).get(1).toString().toString(),
+				amoney,
+				((ArrayList)tmp.get(4)).get(1).toString().toString());
+		System.out.println("fffffffffffffffffffffffffff");
+		int re=t.getTitleID(((ArrayList)tmp.get(9)).get(1).toString());
 		System.out.println("fffffffffffffffffffffffffff");
 		t.close();
 		return re;
