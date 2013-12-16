@@ -96,8 +96,8 @@ public class HTMLGetter {
 	private int houseMysqlUpload(ArrayList tmp)
 	{
 		PHPMysql t=new PHPMysql();
-		String money="";
-		String splitMoney []=((ArrayList)tmp.get(1)).get(1).toString().split("萬");
+		String money=((ArrayList)tmp.get(2)).get(1).toString().toString();
+		/*String splitMoney []=((ArrayList)tmp.get(1)).get(1).toString().split("萬");
 		((ArrayList)tmp.get(1)).set(1, splitMoney[0]);
 		
 		for(int i=0;i<((ArrayList)tmp.get(1)).get(1).toString().length();i++)

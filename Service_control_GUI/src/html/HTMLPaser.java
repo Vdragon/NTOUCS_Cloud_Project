@@ -268,6 +268,10 @@ public class HTMLPaser
 					 break;
 				 str[i++] = ite.next().text();
 			 }
+			 str2 = str[2];
+			 str[2] = str2.substring(0,4);
+			 str2 = str[4];
+			 str[4] = str2.substring(0,(str2.length()-2));
 			 table = table.select("#b_price").get(0);
 			 ite = table.select("div").iterator();
 			 str[i] = ite.next().text();
