@@ -268,6 +268,10 @@ public class HTMLPaser
 					 break;
 				 str[i++] = ite.next().text();
 			 }
+			 str2 = str[2];
+			 str[2] = str2.substring(0,4);
+			 str2 = str[4];
+			 str[4] = str2.substring(0,(str2.length()-2));
 			 table = table.select("#b_price").get(0);
 			 ite = table.select("div").iterator();
 			 str[i] = ite.next().text();
@@ -281,6 +285,11 @@ public class HTMLPaser
 			 tmp.add(str[0]);
 			 //System.out.println(str[11]);
 			 this.houseInfo.add(tmp);
+			 tmp=new ArrayList();
+			 tmp.add("車款：");
+			 tmp.add(str[1]);
+			 //System.out.println(str[3]);
+			 this.houseInfo.add(tmp);			 
 			 tmp=new ArrayList();
 			 tmp.add("售價 (萬)：");
 			 tmp.add(str[6]);
@@ -353,6 +362,12 @@ public class HTMLPaser
 				 tmp.add(str[0]);
 				 //System.out.println(str[11]);
 				 this.houseInfo.add(tmp);
+				 tmp=new ArrayList();
+				 tmp.add("車款：");
+				 tmp.add(str[1]);
+				 //System.out.println(str[3]);
+				 this.houseInfo.add(tmp);
+				 
 				 tmp=new ArrayList();
 				 tmp.add("售價 (萬)：");
 				 tmp.add(str[7]);

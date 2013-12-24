@@ -23,12 +23,14 @@ public class HTMLGetterTest {
 		
 		
 		ArrayList checked_URL = new ArrayList();
+		
+		
 		HTMLGetter test=new HTMLGetter(checked_URL); 
 		
 		//test.totalHtmlPase();
 		try
 		{
-			test.htmlPase("https://www.hotcar.com.tw/CWA/CWA060.aspx?TSEQNO=86697",1);
+			test.htmlPase("http://auto.8891.com.tw/usedauto-infos-381786.html",1);
 		}
 		catch(Exception e)
 		{

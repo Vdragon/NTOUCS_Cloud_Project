@@ -19,11 +19,13 @@ public class PHPMysql
 	//結果集 
 	private PreparedStatement pst = null; 
 	//執行,傳入之sql為預儲之字申,需要傳入變數之位置 
-	private String dataBaseName="HouseTmp";
+	private String dataBaseName="CarTmp";
 	private String selectSQL = "SELECT * FROM `"; 
-	private String deleteDataSQL="Delete FROM `HouseTmp`";
-	private String insertdbSQL = "insert into HouseTmp(ID,Title,Address,OrginURL,money) " + 
-		      "select ifNULL(max(ID),0)+1,?,?,?,? FROM `HouseTmp`"; 
+	private String deleteDataSQL="Delete FROM `CarTmp`";
+	
+	//ID 	name 	,Brands,company,Year,Displacement,Url,Address,Price,color
+	private String insertdbSQL = "insert into CarTmp(ID,name,Brands,company,Year,Displacement,Url,Address,Price,color) " + 
+		      "select ifNULL(max(ID),0)+1,?,?,?,?,?,?,?,?,? FROM `CarTmp`"; 
 	public PHPMysql() 
 	{
 		try { 
@@ -78,7 +80,7 @@ public class PHPMysql
 			selectSQL = "SELECT * FROM `";
 			selectSQL+=dataBaseName;
 			selectSQL+="` ";
-			selectSQL+="WHERE Title = '";
+			selectSQL+="WHERE Url = '";
 			selectSQL+=title;
 			selectSQL+="' ";
 			
@@ -86,16 +88,23 @@ public class PHPMysql
 		}
 		 //新增資料 
 		  //可以看看PrepareStatement的使用方式 
-		  public void insertTable(String title,String address,String orginURL,int money) 
+		
+		//name,Brands,company,Year,Displacement,Url,Address,Price,color		
+		  public void insertTable(String name,String Brands,String company,int Year,int Displacement,String Url,String Address,int Price,String color) 
 		  { 
 		    try 
 		    { 
 		      pst = (PreparedStatement) con.prepareStatement(insertdbSQL); 
 		      
-		      pst.setString(1, title);
-		      pst.setString(2, address);
-		      pst.setString(3, orginURL);
-		      pst.setInt(4, money);
+		      pst.setString(1, name);
+		      pst.setString(2, Brands);
+		      pst.setString(3, company);
+		      pst.setInt(4, Year);
+		      pst.setInt(5, Displacement);
+		      pst.setString(6, Url);
+		      pst.setString(7, Address);
+		      pst.setInt(8, Price);
+		      pst.setString(9, color);
 		      pst.executeUpdate(); 
 		    } 
 		    catch(SQLException e) 
@@ -107,7 +116,8 @@ public class PHPMysql
 		  public int getTitleID(String title)
 		  {
 			  this.sqlGenerateFormTitle(title);
-			  return this.getdataTableID();
+			  //return this.getdataTableID();
+			  return 1;
 		  }
 		  
 		private int getdataTableID() 
@@ -133,7 +143,7 @@ public class PHPMysql
 		}
 		public void get_URLS(ArrayList tmp,String houseAgency,int max)
 		{
-			String selectedurl="SELECT `OrginURL` FROM `HouseTmp` WHERE `OrginURL` LIKE \"%";
+			String selectedurl="SELECT `OrginURL` FROM `CarTmp` WHERE `OrginURL` LIKE \"%";
 			selectedurl+=houseAgency;
 			selectedurl+="%\"";
 			try 
