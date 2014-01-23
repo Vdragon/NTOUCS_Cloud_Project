@@ -149,7 +149,7 @@ public class HTMLGetter {
 		Command t =new Command();
 		System.out.println("====== 開始上傳至 HDFS ======");
 		t.Upload_HDFS("/opt/nutch/tmp", "/HouseTmp/"+id);
-		System.out.println("====== 開始上傳至 HDFS ======");
+		System.out.println("====== 結束上傳至 HDFS ======");
 	}
 	private void houseXmlPaser(ArrayList tmp)
 	{
