@@ -39,6 +39,7 @@ public class HTMLGetter {
 
 	public void totalHtmlPase()
 	{
+		
 		for(int i=0;i<totalURL.size();i++)
 		{
 			System.out.println("now URL"+((ArrayList)this.totalURL.get(i)).get(0).toString());
@@ -67,13 +68,16 @@ public class HTMLGetter {
 		if(t.get_html_ok()==true&&t.checkURLExist(urlLost)==true)
 		{
 			t.paseHTML();
+			System.out.println("0=====================================================");
 			this.houseImageDownload(t.getHouseImageURL());
 			System.out.println("1=====================================================");
 			this.houseInfoDownload(t.getHouseInfo());
 			System.out.println("2=====================================================");
 			int id =this.houseMysqlUpload(t.getHouseInfo());
+			System.out.println("3=====================================================");
 			this.hosueHDFSUpload(id);
-			this.houseXmlPaser(t.getHouseInfo());
+			System.out.println("4=====================================================");
+			//this.houseXmlPaser(t.getHouseInfo());
 		}
 	}
 	private void houseImageDownload(String [] tmp)
@@ -123,6 +127,7 @@ public class HTMLGetter {
 			real_money=6666;
 		}
 		amoney = (int)real_money;
+		System.out.println("fffffffffffffffffffffffffff");
 		//name,Brands,company,Year,Displacement,Url,Address,Price,color
 		t.insertTable(((ArrayList)tmp.get(1)).get(1).toString(),
 				((ArrayList)tmp.get(0)).get(1).toString().toString(),
