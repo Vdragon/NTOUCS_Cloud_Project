@@ -214,9 +214,9 @@ public class HTMLPaser
 		
 		else if(this.houseAgency.endsWith("8891交易網"))
 		{
-			table = doc.select(".ti-wapper");
+			table = doc.select(".thumb-item");
 			String img = "";
-			img = "http:" + table.get(0).select("img").attr("src").toString();
+			img = "http:" + table.get(0).select("a").attr("href").toString();
 			gg.add(img);
 		}
 		
