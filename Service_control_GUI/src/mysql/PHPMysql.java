@@ -117,8 +117,8 @@ public class PHPMysql
 		  public int getTitleID(String title)
 		  {
 			  this.sqlGenerateFormTitle(title);
-			  //return this.getdataTableID();
-			  return 1;
+			  return this.getdataTableID();
+			  //return 1;
 		  }
 		  
 		private int getdataTableID() 
