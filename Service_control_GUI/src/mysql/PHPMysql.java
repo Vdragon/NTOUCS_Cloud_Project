@@ -106,6 +106,7 @@ public class PHPMysql
 		      pst.setInt(8, Price);
 		      pst.setString(9, color);
 		      pst.executeUpdate(); 
+		      System.out.println("sql:" + pst);
 		    } 
 		    catch(SQLException e) 
 		    { 
