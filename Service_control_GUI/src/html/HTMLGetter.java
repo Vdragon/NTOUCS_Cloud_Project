@@ -139,8 +139,8 @@ public class HTMLGetter {
 				amoney,
 				((ArrayList)tmp.get(4)).get(1).toString().toString());
 		System.out.println("fffffffffffffffffffffffffff");
-		int re=t.getTitleID(((ArrayList)tmp.get(9)).get(1).toString());
-		System.out.println("fffffffffffffffffffffffffff");
+		int re=t.getTitleID(((ArrayList)tmp.get(8)).get(1).toString().toString());
+		System.out.println(re+"  fffffffffffffffffffffffffff");
 		t.close();
 		return re;
 	}
